@@ -1,5 +1,7 @@
 package domain.entities;
 
+import domain.enums.AccountType;
+
 public class SavingsAccount extends Account { 
 
 	private double interestRate;
@@ -9,8 +11,8 @@ public class SavingsAccount extends Account {
 		super();
 	}
 	
-	public SavingsAccount(int number, String holder, double balance, double withDrawLimit, double interesetRate) {
-		super(number,holder,balance,withDrawLimit); //Passing parameters to the superclass constructor
+	public SavingsAccount(int number, String holder, double balance, double withDrawLimit, AccountType type, double interesetRate) {
+		super(number,holder,balance,withDrawLimit,type); //Passing parameters to the superclass constructor
 		
 		this.interestRate = interesetRate;
 	}

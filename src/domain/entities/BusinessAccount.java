@@ -1,5 +1,7 @@
 package domain.entities;
 
+import domain.enums.AccountType;
+
 public class BusinessAccount extends Account {
 	
 	private double loanLimit;
@@ -9,8 +11,8 @@ public class BusinessAccount extends Account {
 		super();
 	}
 	
-	public BusinessAccount(int number, String holder,double initialDeposit, double withDrawLimit, double loanLimit) {
-		super(number,holder,initialDeposit,withDrawLimit);  //Passing parameters to the superclass constructor
+	public BusinessAccount(int number, String holder,double initialDeposit, double withDrawLimit, AccountType type, double loanLimit) {
+		super(number,holder,initialDeposit,withDrawLimit,type);  //Passing parameters to the superclass constructor
 		
 		this.loanLimit = loanLimit;
 	}

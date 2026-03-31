@@ -1,4 +1,5 @@
 package domain.entities;
+import domain.enums.AccountType;
 
 public abstract class Account {
 
@@ -6,18 +7,21 @@ public abstract class Account {
 	private String holder;
 	protected double balance;
 	private double withDrawLimit;
+	private AccountType type;
+	
 
 	// Constructors
 	public Account() {
 
 	}
 
-	public Account(int number, String holder, double initialDeposit, double withDrawLimit) {
+	public Account(int number, String holder, double initialDeposit, double withDrawLimit,AccountType type) {
 
 		this.number = number;
 		this.holder = holder;
 		this.balance = initialDeposit;
 		this.withDrawLimit = withDrawLimit;
+		this.type = type;
 
 	}
 
@@ -50,7 +54,14 @@ public abstract class Account {
 
 	public void setWithDrawLimit(double amount) {
 		this.withDrawLimit = amount;
-
+	}
+	
+	public AccountType getType() {
+		return type;
+	}
+	
+	public void setType(AccountType type) {
+		this.type = type;
 	}
 
 }
