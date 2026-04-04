@@ -81,7 +81,7 @@ public class BusinessAccount extends Account {
 		sb.append("Holder: ").append(getHolder()).append(", ");
 		sb.append("Account Number: ").append(getNumber()).append("\n");
 		sb.append("Balance: $").append(String.format("%.2f", balance)).append("\n");
-		sb.append("Account Type: ").append(getType());
+		sb.append("Account Type: ").append(getType().getAccountType());
 		return sb.toString();
 	}
 

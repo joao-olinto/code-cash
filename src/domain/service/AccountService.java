@@ -47,13 +47,13 @@ public class AccountService {
 	}
 
 	// method to make a deposit
-	public void deposit(double amount, String number) {
+	public void deposit(String number, double amount) {
 		Account acc = findAccountByNumber(number);
 		acc.deposit(amount);
 	}
 
 	// method to make a with draw
-	public void withDraw(double amount, String number) {
+	public void withDraw(String number, double amount) {
 		Account acc = findAccountByNumber(number);
 		acc.withDraw(amount);
 	}
