@@ -1,7 +1,7 @@
 package domain.entities;
 
-import domain.Exception.DomainException;
 import domain.enums.AccountType;
+import domain.exception.DomainException;
 
 public class BusinessAccount extends Account {
 

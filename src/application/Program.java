@@ -4,11 +4,12 @@ import java.util.InputMismatchException;
 
 import java.util.Locale;
 import java.util.Scanner;
-import domain.Exception.DomainException;
+
 import domain.entities.Account;
 import domain.entities.BusinessAccount;
 import domain.entities.SavingsAccount;
 import domain.enums.AccountType;
+import domain.exception.DomainException;
 import domain.service.AccountService;
 
 public class Program {
@@ -22,27 +23,45 @@ public class Program {
 			AccountService service = new AccountService();
 			int option = 0;
 			do {
-				option = showMenu(sc);
+				showMenu();
+				option = sc.nextInt();
+				sc.nextLine();
 
 				switch (option) {
 
 				case 1:
+					clearScreen();
 					createAccount(sc, service);
 					break;
-
 				case 2:
+					clearScreen();
 					deposit(sc, service);
 					break;
 				case 3:
+					clearScreen();
 					withDraw(sc, service);
 					break;
 				case 4:
 					showAccounts(service);
 					break;
+				case 5:
+					clearScreen();
+					removeAccount(sc, service);
+					break;
+					
 				case 0:
+					clearScreen();
 					System.out.println("Thank you for using CodeCash!");
 					break;
+				default:
+					clearScreen();
+					System.out.println("Invalid option.");
+					break;
 				}
+
+				// Aplicar esse metodo no codigo!!! importante
+				// System.out.print("\033[H\033[2J");
+				// System.out.flush();
 
 			} while (option != 0);
 
@@ -66,7 +85,7 @@ public class Program {
 	}
 
 	// displays the program menu.
-	public static int showMenu(Scanner sc) {
+	public static void showMenu() {
 
 		System.out.println("======= CODECASH BANK =========");
 		System.out.println("1 - Create account");
@@ -77,8 +96,6 @@ public class Program {
 		System.out.println("0 - exit");
 		System.out.println();
 		System.out.print("Choose an option: ");
-		// return integer number
-		return sc.nextInt();
 	}
 
 	// Creates accounts according to the type chosen by the user.
@@ -165,23 +182,31 @@ public class Program {
 
 	}
 
-	//method that shows all created accounts
+	// method that shows all created accounts
 	public static void showAccounts(AccountService service) {
 
 		System.out.println("======= ACCOUNT LIST =======");
 
-		//Instead of creating the list of accounts directly in the main method, we use it through the service object.
+		// Instead of creating the list of accounts directly in the main method, we use
+		// it through the service object.
 		for (Account acc : service.getAccounts()) {
 			System.out.println();
 			System.out.println(acc);
 		}
 	}
 
-	//A method that removes an item using the service object.
-	public static void RemoveAccount(Scanner sc, AccountService service) {
+	// A method that removes an item using the service object.
+	public static void removeAccount(Scanner sc, AccountService service) {
+
 		System.out.print("Enter account number: ");
 		String accountNumber = sc.nextLine();
 		service.removeAccount(accountNumber);
 		System.out.println("Account removed sucessfully.");
+	}
+
+	// A method that clears the console after each method call.
+	public static void clearScreen() {
+		System.out.println("\033[H\033[2J");
+		System.out.flush();
 	}
 }

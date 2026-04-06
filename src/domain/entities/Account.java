@@ -1,7 +1,7 @@
 package domain.entities;
 
-import domain.Exception.DomainException;
 import domain.enums.AccountType;
+import domain.exception.DomainException;
 
 public abstract class Account {
 
@@ -73,6 +73,8 @@ public abstract class Account {
 			throw new DomainException("Account Error: the with drawal limit cannot be less than zero.");
 		}
 		
+		this.withDrawLimit = amount;
+		
 	}
 
 	public AccountType getType() {
@@ -96,7 +98,7 @@ public abstract class Account {
 	public abstract void withDraw(double amount);
 
 	//method that validates the constructor
-	public void validateRules(String number, String holder, double balance, double withDrawLimit)
+	private void validateRules(String number, String holder, double balance, double withDrawLimit)
 			throws DomainException {
 
 		if (number.isBlank() || !number.trim().matches("^\\d{4}$")) {
