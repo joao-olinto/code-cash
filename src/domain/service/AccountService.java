@@ -3,25 +3,24 @@ package domain.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Exception.DomainException;
 import domain.entities.Account;
+import domain.exception.DomainException;
 
 public class AccountService {
 
 	// List of polymorphic accounts
-	private List<Account> accounts = new ArrayList<>();
+	private final List<Account> accounts = new ArrayList<>();
 
 	// method for adding accounts to the list
 	public void addAccount(Account acc) {
 
 		// Check if an account with the same number already exists.
 		// If it exists, throw the error; otherwise, add it to the list of accounts.
-		accounts.stream().filter(account -> account.getNumber().equals(acc.getNumber())).findFirst()
-				.ifPresentOrElse(account -> {
-					throw new DomainException("Service Error: There is an account with that number.");
-				}, () -> {
-					accounts.add(acc);
-				});
+		if(accounts.stream().anyMatch(account -> account.getNumber().equals(acc.getNumber()))) {
+			throw new DomainException("Service Error: There is an account with that number.");
+		}
+		
+		accounts.add(acc);
 	}
 
 	// method for remove accounts to the list
@@ -60,6 +59,11 @@ public class AccountService {
 
 	// returns a shallow copy of the list
 	public List<Account> getAccounts() {
+		
+		//exception if there are no elements in the list.
+		if(accounts.isEmpty()) {
+			throw new DomainException("Service error: There are no accounts listed.");
+		}
 		return List.copyOf(accounts);
 	}
 }
